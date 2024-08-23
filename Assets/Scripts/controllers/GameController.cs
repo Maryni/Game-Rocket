@@ -67,16 +67,13 @@ namespace Project
             
             _dailyController.OnDailyRewardReady += () => _uiController.SetDailyReward(_dailyController.DailyRewards);
             _dailyController.OnDailyRewardClick += () => AddMoney(_dailyController.ClaimDailyReward());
-            _dailyController.OnDailyRewardClick += () => _uiController.SetMoneyText(Money.ToString());
             _dailyController.OnDailyRewardClick += () => _uiController.SetDailyRewardClaimed(_dailyController.DailyRewards);
             
             _upgradeController.OnMoneyEnough += CheckMoney;
             _upgradeController.OnSpendMoney += LoseMoney;
             _upgradeController.OnUpgradeComplete += () => AddMoneyByClick(1);
-            _upgradeController.OnUpgradeComplete += () =>_uiController.SetMoneyText(Money.ToString());
             
             _levelController.OnMoneyGet += () => AddMoney(MoneyByClick);
-            _levelController.OnMoneyGet += () =>_uiController.SetMoneyText(Money.ToString());
             _levelController.OnClickBoost += () => AddMoney(MoneyByClick * _levelController.CurrentRocketInfo.MultiplierBoost);
             _levelController.OnUpdateBoost += () => _uiController.SetBoostCurrentText(_levelController.CurrentRocketInfo.BoostCountClicks.ToString());
             _levelController.OnUpdateBoost += () => _uiController.SetBoostMaxText(_levelController.CurrentRocketInfo.BoostCountMaxClicks.ToString());
@@ -88,13 +85,19 @@ namespace Project
         }
         
         private void AddMoneyByClick(int value) => MoneyByClick += value;
-        private void AddMoney(int value) => Money += value;
+
+        private void AddMoney(int value)
+        {
+            Money += value;
+            _uiController.SetMoneyText(Money.ToString());
+        }
 
         private void LoseMoney(int value)
         {
-            if (value > Money)
+            if (Money >= value)
             {
                 Money -= value;
+                _uiController.SetMoneyText(Money.ToString());
             }
         }
 
