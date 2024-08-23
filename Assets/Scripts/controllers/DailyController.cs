@@ -50,9 +50,16 @@ namespace Project.Daily
         
         public int ClaimDailyReward()
         {
-            var current = DailyRewards.FirstOrDefault(x => x.IsAvailable);
-            current.IsClaimed = true;
-            return current.Reward;
+            var current = DailyRewards.FirstOrDefault(x => x.IsAvailable && !x.IsClaimed);
+            if (current != null)
+            {
+                current.IsClaimed = true;
+                return current.Reward;  
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public void CheckDaily() => CheckDailyAvailable();

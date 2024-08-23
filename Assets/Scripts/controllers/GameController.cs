@@ -68,6 +68,7 @@ namespace Project
             _dailyController.OnDailyRewardReady += () => _uiController.SetDailyReward(_dailyController.DailyRewards);
             _dailyController.OnDailyRewardClick += () => AddMoney(_dailyController.ClaimDailyReward());
             _dailyController.OnDailyRewardClick += () => _uiController.SetMoneyText(Money.ToString());
+            _dailyController.OnDailyRewardClick += () => _uiController.SetDailyRewardClaimed(_dailyController.DailyRewards);
             
             _upgradeController.OnMoneyEnough += CheckMoney;
             _upgradeController.OnSpendMoney += LoseMoney;

@@ -58,11 +58,11 @@ namespace Project.UI
             _sliderFuel.value = float.Parse(fuelCurrent);
         }
         
-        public void SetDailyRewardAvailable(List<DailyReward> rewards)
+        public void SetDailyRewardClaimed(List<DailyReward> rewards)
         {
             for (int i=0; i< rewards.Count; i++)
             {
-                if (rewards[i].IsAvailable)
+                if (rewards[i].IsClaimed)
                 {
                     _allRewardUI[i].BackgroundImage.sprite = _rewardClaimed;
                 }
