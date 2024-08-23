@@ -41,6 +41,7 @@ namespace Project.Upgrades
             {
                 if (currentElement.CountUpgrades < 10)
                 {
+                    Debug.Log($"cost = {costUpgrade}");
                     OnSpendMoney?.Invoke(costUpgrade);
                     currentElement.CellImages[currentElement.CountUpgrades].sprite = _fullCell;
                     currentElement.CountUpgrades++;
